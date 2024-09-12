@@ -28,4 +28,21 @@ import fs from "fs";
         }
     }
 
-export {uploadOnCloudinary};
+    const deleteFromCloudinary=async(FileId)=>{
+        try {
+            if (!publicId) return null;
+    
+            const result = await cloudinary.uploader.destroy(publicId, {
+                resource_type: "image"
+            });
+    
+            console.log("Old avatar Image from Cloudinary:", result);
+            return result;
+        } catch (error) {
+            console.error("Failed to delete old avatar image:", error);
+            return null;
+        }
+    };
+    
+
+export {uploadOnCloudinary,deleteFromCloudinary};
